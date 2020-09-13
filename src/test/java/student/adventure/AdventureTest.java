@@ -1,7 +1,5 @@
 package student.adventure;
 
-import org.hamcrest.CoreMatchers;
-import org.junit.Before;
 import org.junit.*;
 
 public class AdventureTest {
@@ -10,5 +8,5 @@ public class AdventureTest {
         // This is run before every test.
     }
 
-
+    
 }

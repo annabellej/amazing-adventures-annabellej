@@ -1,5 +1,6 @@
 package student.adventure;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -19,10 +20,11 @@ public class GameEngine
      * Initiates this game map from a given file.
      * Player starts with no items.
      */
-    public GameEngine(String fileName) {
+    public GameEngine(String fileName) throws IOException {
         playerInventory = new ArrayList<>();
 
-        //IMPLEMENT
+        MapDataReader dataReader = new MapDataReader(fileName);
+        gameMap = dataReader.deserializeFile();
     }
 
     /**
