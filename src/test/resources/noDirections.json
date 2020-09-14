@@ -8,10 +8,6 @@
 			"chair",
 			"rope"
 		],
-		"possibleDirections": [
-			"East",
-			"South"
-		],
 		"possibleRooms": [
 			2, 
 			4

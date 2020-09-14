@@ -2,7 +2,7 @@
 	"allRooms": [{
 		"roomName": "Holding Room",
 		"roomDescription": "You are surrounded by blank concrete walls.",
-		"roomNumber": 1,
+		"roomNumber": -1,
 		"endRoom": false,
 		"itemsVisible": [
 			"chair",

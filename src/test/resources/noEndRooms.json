@@ -132,7 +132,7 @@
 		"roomName": "Exit Hallway",
 		"roomDescription": "A locked door leads outside. Miraculously, the guards seem to be on their lunch break.",
 		"roomNumber": 9,
-		"endRoom": true,
+		"endRoom": false,
 		"possibleDirections": [
 			"North",
 			"West"

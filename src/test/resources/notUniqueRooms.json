@@ -19,7 +19,7 @@
 	}, {
 		"roomName": "Hallway",
 		"roomDescription": "A boring concrete hallway. Not much to see here.",
-		"roomNumber": 2,
+		"roomNumber": 1,
 		"endRoom": false,
 		"possibleDirections": [
 			"East",

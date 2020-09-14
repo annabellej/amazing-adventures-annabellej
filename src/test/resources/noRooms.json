@@ -11,10 +11,6 @@
 		"possibleDirections": [
 			"East",
 			"South"
-		],
-		"possibleRooms": [
-			2, 
-			4
 		]
 	}, {
 		"roomName": "Hallway",

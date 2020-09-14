@@ -3,7 +3,7 @@
 		"roomName": "Holding Room",
 		"roomDescription": "You are surrounded by blank concrete walls.",
 		"roomNumber": 1,
-		"endRoom": false,
+		"endRoom": true,
 		"itemsVisible": [
 			"chair",
 			"rope"
