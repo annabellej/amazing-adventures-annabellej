@@ -40,6 +40,41 @@ public class GameMap
     }
 
     /**
+     * Builds a map linking each room's number to its index in the list of all rooms.
+     * Helps to transition to different rooms during a game.
+     *
+     * @return a map linking each room's number to its corresponding index in allRooms.
+     */
+    public Map<Integer, Integer> mapRoomNumbersToIndex() {
+        Map<Integer, Integer> roomNumberIndexLinks = new HashMap<>();
+
+        for (int index = 0; index < allRooms.size(); index++) {
+            int currentRoomNumber = allRooms.get(index).getRoomNumber();
+
+            roomNumberIndexLinks.put(currentRoomNumber, index);
+        }
+
+        return roomNumberIndexLinks;
+    }
+
+    /**
+     * Determines whether this map has rooms with valid properties.
+     * Helps check if this is a valid map for a game.
+     *
+     * @return true  if this map has valid rooms, else
+     *         false if this map doesn't have valid rooms.
+     */
+    public boolean hasValidRooms() {
+        for (Room currentRoom: allRooms) {
+            if (!currentRoom.isValidRoom()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Determines whether this map has exactly one end room.
      * Helps check if this is a valid map for a game.
      *
@@ -74,22 +109,5 @@ public class GameMap
         }
 
         return roomNumbers.size() == allRooms.size();
-    }
-
-    /**
-     * Determines whether this map has rooms with valid properties.
-     * Helps check if this is a valid map for a game.
-     *
-     * @return true  if this map has valid rooms, else
-     *         false if this map doesn't have valid rooms.
-     */
-    public boolean hasValidRooms() {
-        for (Room currentRoom: allRooms) {
-            if (!currentRoom.isValidRoom()) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }

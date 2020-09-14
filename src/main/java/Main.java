@@ -1,5 +1,4 @@
 import student.adventure.GameEngine;
-import student.adventure.MapDataReader;
 
 import java.io.IOException;
 
