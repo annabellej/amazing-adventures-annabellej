@@ -12,11 +12,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public enum Direction
 {
     @JsonProperty("North")
-    North,
+    north,
     @JsonProperty("South")
-    South,
+    south,
     @JsonProperty("East")
-    East,
+    east,
     @JsonProperty("West")
-    West
+    west
 }
