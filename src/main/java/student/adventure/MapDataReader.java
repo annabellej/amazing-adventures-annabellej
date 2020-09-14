@@ -28,20 +28,37 @@ public class MapDataReader
     }
 
     /**
-     * Given the name of a JSON file, deserializes the file if it's valid.
+     * Given the name of a JSON file, deserializes the file if it produces a valid game map.
      *
      * @return the Object containing the deserialized data.
      */
     public GameMap deserializeFile() throws IOException {
-        if (fileName == null || fileName.length() == 0) {
+        //error check: given file name is invalid
+        if (fileName == null || fileName.length() == 0) { //error check: file name is invalid
             throw new IllegalArgumentException("Invalid file name.");
         }
 
         BufferedReader dataFile = new BufferedReader(new FileReader(fileName));
 
+        //error check: data file is empty
+        if (dataFile.readLine() == null) {
+            throw new NullPointerException("Data file is empty.");
+        }
+
         GameMap deserializedMap = new ObjectMapper().readValue(dataFile, GameMap.class);
 
-        //IMPLEMENT ERROR CHECKS
+        //error check: deserialized game map has invalid structure
+        if (!deserializedMap.hasEndRoom()) {
+            throw new InvalidObjectException("Game map does not have an end room.");
+        }
+        else if (!deserializedMap.hasUniqueRoomNumbers()) {
+            throw new InvalidObjectException("Two or more rooms have same room number.");
+        }
+
+        //error check: deserialized game map has invalid values
+        if (!deserializedMap.hasValidRooms()) {
+            throw new InvalidObjectException("One or more rooms have invalid attribute values.");
+        }
 
         return deserializedMap;
     }

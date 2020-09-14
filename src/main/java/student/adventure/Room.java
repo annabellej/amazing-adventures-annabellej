@@ -88,13 +88,34 @@ public class Room
         this.itemsVisible = itemsVisible;
     }
 
-    public void setPossibleDirections(List<Direction> possibleDirections)
-    {
+    public void setPossibleDirections(List<Direction> possibleDirections) {
         this.possibleDirections = possibleDirections;
     }
 
     public void setPossibleRooms(List<Integer> possibleRooms)
     {
         this.possibleRooms = possibleRooms;
+    }
+
+    /**
+     * Determines if this room has valid properties:
+     * Room name and description should not be empty, room number should be positive,
+     * this room should have at least one possible direction/room to move to.
+     *
+     * @return true  if this room has valid properties, else
+     *         false if this room has at least one invalid property.
+     */
+    public boolean isValidRoom() {
+        if (roomName.equals("") || roomDescription.equals("")) {
+            return false;
+        }
+        else if (roomNumber <= 0) {
+            return false;
+        }
+        else if (possibleDirections.size() < 1 || possibleRooms.size() < 1) {
+            return false;
+        }
+
+        return true;
     }
 }

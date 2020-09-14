@@ -30,12 +30,14 @@ public class GameEngine
     /**
      * Begins and runs an adventure game by prompting player for moves,
      * updating game parameters accordingly, and responding to the player's
-     * actions through the console.
+     * actions through the console. The game always starts in room number 1.
      *
      * Game ends when the end room has been found by the player or if
      * the player quits the game.
      */
     public void runGame() {
         //IMPLEMENT
+        //print out intro message
+
     }
 }
