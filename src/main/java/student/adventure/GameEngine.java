@@ -76,6 +76,10 @@ public class GameEngine {
         return currentRoom;
     }
 
+    public List<Integer> getOrderedVisitedRooms() {
+        return orderedVisitedRooms;
+    }
+
     /**
      * Adds an item to this player's inventory.
      *

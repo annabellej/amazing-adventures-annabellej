@@ -273,14 +273,16 @@ public class GameEngineTest {
         assertThat(gameOutput, CoreMatchers.containsString("Please include an item to drop."));
     }
 
-    //Custom feature test: number of moves to win
+    //Custom feature test
     @Test
-    public void testMoveCounter() {
+    public void testVisitedRoomsHistory() {
         playerInput = "go south" + "\n" + "go north" + "\n" + "quit" + "\n";
         inputStream = new ByteArrayInputStream(playerInput.getBytes());
 
         gamePlayTester.runGame(inputStream);
 
-        assertEquals(2, gamePlayTester.getNumMoves());
+        String gameOutput = outputStream.toString();
+        assertTrue(gamePlayTester.getOrderedVisitedRooms().get(0) == 3);
+        assertTrue(gamePlayTester.getOrderedVisitedRooms().get(1) == 0);
     }
 }
