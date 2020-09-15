@@ -7,10 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * North, South, East, or West.
  *
  * @author  Annabelle Ju
- * @version 9/13/2020
+ * @version 9/14/2020
  */
-public enum Direction
-{
+public enum Direction {
     @JsonProperty("North")
     north,
     @JsonProperty("South")

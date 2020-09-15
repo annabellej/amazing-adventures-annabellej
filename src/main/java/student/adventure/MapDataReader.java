@@ -7,10 +7,9 @@ import java.io.*;
  * Object handling reading in data from any JSON file to a game map.
  *
  * @author  Annabelle Ju
- * @version 9/13/2020
+ * @version 9/14/2020
  */
-public class MapDataReader
-{
+public class MapDataReader {
     private String fileName;
 
     public MapDataReader() {
