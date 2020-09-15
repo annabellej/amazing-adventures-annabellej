@@ -7,17 +7,16 @@ import java.util.*;
  * A room can either be a normal room or the end room of the game.
  *
  * @author  Annabelle Ju
- * @version 9/13/2020
+ * @version 9/14/2020
  */
-public class Room
-{
+public class Room {
     private String roomName;
     private String roomDescription;
     private int roomNumber;
     private boolean endRoom;
     private List<String> itemsVisible;
-    private List<Direction> possibleDirections;
-    private List<Integer> possibleRooms;
+    private List<Direction> possibleDirections; //correspond to room w/ same index in possibleRooms
+    private List<Integer> possibleRooms;        //correspond to direction w/ same index
 
     /**
      * Default constructor for objects of class Room.
@@ -63,28 +62,23 @@ public class Room
     }
 
     //Setters:
-    public void setRoomName(String roomName)
-    {
+    public void setRoomName(String roomName) {
         this.roomName = roomName;
     }
 
-    public void setRoomDescription(String roomDescription)
-    {
+    public void setRoomDescription(String roomDescription) {
         this.roomDescription = roomDescription;
     }
 
-    public void setRoomNumber(int roomNumber)
-    {
+    public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
     }
 
-    public void setEndRoom(boolean endRoom)
-    {
+    public void setEndRoom(boolean endRoom) {
         this.endRoom = endRoom;
     }
 
-    public void setItemsVisible(List<String> itemsVisible)
-    {
+    public void setItemsVisible(List<String> itemsVisible) {
         this.itemsVisible = itemsVisible;
     }
 
@@ -95,6 +89,24 @@ public class Room
     public void setPossibleRooms(List<Integer> possibleRooms)
     {
         this.possibleRooms = possibleRooms;
+    }
+
+    /**
+     * Adds an item to the visible items in this room.
+     *
+     * @param itemName name of the item to add to this room.
+     */
+    public void addItemToRoom(String itemName) {
+        itemsVisible.add(itemName);
+    }
+
+    /**
+     * Removes an item from this room.
+     *
+     * @param itemName the name of the item to remove.
+     */
+    public void removeItemFromRoom(String itemName) {
+        itemsVisible.remove(itemName);
     }
 
     /**
@@ -117,5 +129,37 @@ public class Room
         }
 
         return true;
+    }
+
+    @Override
+    public String toString() {
+        String roomDetails = "You are currently in: " + roomName + "\n" + roomDescription + "\n" +
+                "From here, you can go: ";
+
+        for (int index = 0; index < possibleDirections.size(); index++) {
+            String currentDirection = possibleDirections.get(index).name();
+
+            if (index == possibleDirections.size() - 1) {
+                roomDetails += "or " + currentDirection + "\n";
+            }
+            else {
+                roomDetails += currentDirection + ", ";
+            }
+        }
+
+        roomDetails += "Items visible: ";
+
+        for (int index = 0; index < itemsVisible.size(); index++) {
+            roomDetails += itemsVisible.get(index);
+
+            if (index < itemsVisible.size() - 1) {
+                roomDetails += ", ";
+            }
+            else {
+                roomDetails += "\n";
+            }
+        }
+
+        return roomDetails;
     }
 }
