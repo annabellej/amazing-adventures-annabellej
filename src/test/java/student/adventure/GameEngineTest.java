@@ -239,4 +239,15 @@ public class GameEngineTest {
         String gameOutput = outputStream.toString();
         assertThat(gameOutput, CoreMatchers.containsString("You have moved to: Storage Closet"));
     }
+
+    //Custom feature test: number of moves to win
+    @Test
+    public void testMoveCounter() {
+        playerInput = "go south" + "\n" + "go north" + "\n" + "quit" + "\n";
+        inputStream = new ByteArrayInputStream(playerInput.getBytes());
+
+        gamePlayTester.runGame(inputStream);
+
+        assertEquals(2, gamePlayTester.getNumMoves());
+    }
 }
