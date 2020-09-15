@@ -10,7 +10,7 @@ import java.util.*;
  * GameEngine runs the adventure game Kidnapped! by taking in user input
  * and responding with feedback to progress in the game.
  *
- * Custom game feature: tell player how many moves they took to win.
+ * Custom game feature: print history of player's visited rooms.
  *
  * @author  Annabelle Ju
  * @version 9/14/2020
@@ -22,13 +22,13 @@ public class GameEngine {
     private Map<Integer, Integer> roomNumbersToIndices; //link room number to index in room list
     private Room currentRoom;
     private boolean gameEnded;
-    private int numMoves;
+    private List<Integer> orderedVisitedRooms; //list of the indexes of player's visited rooms
 
     /**
      * Constructor for objects of class GameEngine.
      * Assumes the game prints messages to the console (System.out).
      * Initiates this game map from a given file.
-     * Player always starts with no items in room number 1 with 0 moves.
+     * Player always starts with no items in room number 1.
      */
     public GameEngine(String fileName) throws IOException {
         gameOutputStream = System.out;
@@ -41,14 +41,14 @@ public class GameEngine {
         currentRoom = gameMap.getAllRooms().get(0);
 
         gameEnded = false;
-        numMoves = 0;
+        orderedVisitedRooms = new ArrayList<>();
     }
 
     /**
      * Constructor for objects of class GameEngine.
      * Game prints messages to a given PrintStream.
      * Initiates this game map from a given file.
-     * Player always starts with no items in room number 1 with 0 moves.
+     * Player always starts with no items in room number 1.
      */
     public GameEngine(String fileName, OutputStream gameOutputStream) throws IOException {
         this.gameOutputStream = new PrintStream(gameOutputStream);
@@ -61,7 +61,7 @@ public class GameEngine {
         currentRoom = gameMap.getAllRooms().get(0);
 
         gameEnded = false;
-        numMoves = 0;
+        orderedVisitedRooms = new ArrayList<>();
     }
 
     public List<String> getPlayerInventory() {
@@ -74,10 +74,6 @@ public class GameEngine {
 
     public Room getCurrentRoom() {
         return currentRoom;
-    }
-
-    public int getNumMoves() {
-        return numMoves;
     }
 
     /**
@@ -100,7 +96,7 @@ public class GameEngine {
     /**
      * Begins and runs an adventure game by prompting player for moves through a given input
      * stream, updating game parameters accordingly, and responding to the player's
-     * actions through the console.
+     * actions.
      *
      * Game ends when the end room has been found by the player and the player found the key
      * or if the player quits the game.
@@ -118,11 +114,11 @@ public class GameEngine {
             performAction(scanner.nextLine());
         }
 
-        gameOutputStream.println("You made " + numMoves + " moves total. Thanks for playing!");
+        printGameOutro();
     }
 
     /**
-     * Prints to the console a welcome message to the game for the player.
+     * Prints a welcome message to the game for the player.
      * Includes the game's backstory, rules, etc.
      */
     private void printGameIntro() {
@@ -134,6 +130,19 @@ public class GameEngine {
                 "Luckily, the compound has convenient windows for ceilings, " +
                 "allowing you to navigate by the sun by moving " +
                 "north, south, east, or west through the compound's rooms.");
+    }
+
+    /**
+     * Prints the game outro for the player, including the list of visited rooms
+     * in order of when the player visited them.
+     */
+    private void printGameOutro() {
+        gameOutputStream.println("\n" + "Thanks for playing!");
+        gameOutputStream.println("Here's a quick history of your room traversal: \n");
+
+        for (int roomIndex: orderedVisitedRooms) {
+            gameOutputStream.println(gameMap.getAllRooms().get(roomIndex).getRoomName());
+        }
     }
 
     /**
@@ -160,7 +169,6 @@ public class GameEngine {
                 try {
                     String playerDirection = tokenizer.nextToken().toLowerCase();
                     changeRooms(Direction.valueOf(playerDirection));
-                    numMoves++;
                 }
                 catch (NoSuchElementException e) {
                     gameOutputStream.println("\n" + "Please include a direction to move in. Try again:");
@@ -213,6 +221,7 @@ public class GameEngine {
         currentRoom = gameMap.getAllRooms().get(newRoomIndex);
 
         gameOutputStream.println("\n" + "You have moved to: " + currentRoom.getRoomName() + "." + "\n");
+        orderedVisitedRooms.add(gameMap.getAllRooms().indexOf(currentRoom));
 
         if (currentRoom.isEndRoom()) {
             if (playerInventory.contains("key")) {
