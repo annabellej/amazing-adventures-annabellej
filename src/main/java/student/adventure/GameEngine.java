@@ -118,7 +118,7 @@ public class GameEngine {
             performAction(scanner.nextLine());
         }
 
-        gameOutputStream.println("You made " + numMoves + " total. Thanks for playing!");
+        gameOutputStream.println("You made " + numMoves + " moves total. Thanks for playing!");
     }
 
     /**
