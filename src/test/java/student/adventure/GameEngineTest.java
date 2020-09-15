@@ -240,6 +240,39 @@ public class GameEngineTest {
         assertThat(gameOutput, CoreMatchers.containsString("You have moved to: Storage Closet"));
     }
 
+    @Test
+    public void testNoGivenDirection() {
+        playerInput = "go" + "\n" + "quit" + "\n";
+        inputStream = new ByteArrayInputStream(playerInput.getBytes());
+
+        gamePlayTester.runGame(inputStream);
+
+        String gameOutput = outputStream.toString();
+        assertThat(gameOutput, CoreMatchers.containsString("Please include a direction to move in."));
+    }
+
+    @Test
+    public void testNoGivenItemToTake() {
+        playerInput = "take" + "\n" + "quit" + "\n";
+        inputStream = new ByteArrayInputStream(playerInput.getBytes());
+
+        gamePlayTester.runGame(inputStream);
+
+        String gameOutput = outputStream.toString();
+        assertThat(gameOutput, CoreMatchers.containsString("Please include an item to take."));
+    }
+
+    @Test
+    public void testNoGivenItemToDrop() {
+        playerInput = "drop" + "\n" + "quit" + "\n";
+        inputStream = new ByteArrayInputStream(playerInput.getBytes());
+
+        gamePlayTester.runGame(inputStream);
+
+        String gameOutput = outputStream.toString();
+        assertThat(gameOutput, CoreMatchers.containsString("Please include an item to drop."));
+    }
+
     //Custom feature test: number of moves to win
     @Test
     public void testMoveCounter() {
